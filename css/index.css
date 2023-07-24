@@ -58,3 +58,58 @@ body {
   font-weight: 400;
   color: #555;
 }
+
+/* ****************************** */
+/* GENERAL REUSABLE COMPONENTS */
+/* ****************************** */
+
+.container {
+  /* 1140px or 1200px are industry practice max-widths */
+  padding: 0;
+  height: 100vh;
+  width: 100%;
+  margin: 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url(/imgs/dragon.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+/* ****************************** */
+/* Dragon IMG Background */
+/* ****************************** */
+
+/* .bg-img {
+  background-image: url(/imgs/dragon.png)
+  background-size: cover;
+  background-repeat: no repeat;
+  height: 100vh;
+} */
+
+/* ****************************** */
+/* button container */
+/* ****************************** */
+
+.button--container {
+  background-color: #e29e3d;
+  margin: 300px 0 0 0;
+  padding: 10px;
+  width: auto;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn {
+  background-color: #c4582b;
+  padding: 10px 20px;
+  text-decoration: none;
+}
+
+.btn--right {
+  margin: 0 0 0 20px;
+}
