@@ -84,7 +84,7 @@ body {
 /* ****************************** */
 
 .button--container {
-  background-color: #e29e3d;
+  background-color: #a0a8bb;
   margin: 300px 0 0 0;
   padding: 10px;
   width: auto;
@@ -99,9 +99,24 @@ body {
   padding: 10px 20px;
   text-decoration: none;
   font-size: 18px;
-  font-color: #e29e3d;
+  color: #e29e3d;
 }
 
 .btn--right {
   margin: 0 0 0 40px;
+}
+
+.btn:link,
+.btn:visited {
+  display: inline-block;
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  font-size: 1.8rem;
+  transition: all 0.3s;
+}
+
+.btn:hover,
+.btn:active {
+  color: #e29e3d;
 }
