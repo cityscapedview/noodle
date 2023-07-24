@@ -53,7 +53,7 @@ html {
 }
 
 body {
-  font-family: "Rubik", sans-serif;
+  font-family: "MedievalSharp", cursive;
   line-height: 1;
   font-weight: 400;
   color: #555;
@@ -98,6 +98,8 @@ body {
   background-color: #c4582b;
   padding: 10px 20px;
   text-decoration: none;
+  font-size: 18px;
+  font-color: #e29e3d;
 }
 
 .btn--right {
