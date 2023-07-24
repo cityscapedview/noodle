@@ -75,19 +75,9 @@ body {
   background-image: url(/imgs/dragon.png);
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: center center;
+  background-position-x: center;
+  background-position-y: top;
 }
-
-/* ****************************** */
-/* Dragon IMG Background */
-/* ****************************** */
-
-/* .bg-img {
-  background-image: url(/imgs/dragon.png)
-  background-size: cover;
-  background-repeat: no repeat;
-  height: 100vh;
-} */
 
 /* ****************************** */
 /* button container */
@@ -111,5 +101,5 @@ body {
 }
 
 .btn--right {
-  margin: 0 0 0 20px;
+  margin: 0 0 0 40px;
 }
