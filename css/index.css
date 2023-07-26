@@ -92,6 +92,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  border-style: double;
+  border-color: #c4582b;
 }
 
 .btn {
@@ -100,6 +102,7 @@ body {
   text-decoration: none;
   font-size: 18px;
   color: #e29e3d;
+  border-style: double;
 }
 
 .btn--right {
