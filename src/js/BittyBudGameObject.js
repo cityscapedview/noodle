@@ -120,7 +120,7 @@ export default class BittyBudGameObject {
   update() {
     if (
       this.#isIgnited &&
-      this.#aliveFrames++ > this.#dieAfterFrames &&
+      ++this.#aliveFrames > this.#dieAfterFrames &&
       !this.#isMoving
     ) {
       this.#game.removeGameObject(this.gameObjectID, [

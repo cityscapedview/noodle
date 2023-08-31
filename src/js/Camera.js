@@ -1,6 +1,6 @@
 export default class Camera {
   #position;
-  #zoom = 2;
+  #zoom = 1;
   #maxZoom = 4;
   #maxCellX;
   #maxCellY;

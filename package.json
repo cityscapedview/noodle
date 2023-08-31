@@ -4,12 +4,14 @@
   "description": "the 13kjs game for team noodle",
   "source": "src/index.html",
   "scripts": {
-    "start": "parcel serve --port 7227 src/index.html src/title-page.html",
+    "start": "parcel serve --port 7227 src/index.html src/title-page.html src/tests.html",
     "build": "bin/build.sh"
   },
   "license": "MIT",
   "devDependencies": {
     "archiver": "^6.0.0",
-    "parcel": "^2.9.3"
+    "parcel": "^2.9.3",
+    "process": "^0.11.10",
+    "qunit": "^2.19.4"
   }
 }
