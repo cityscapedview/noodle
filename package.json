@@ -1,0 +1,15 @@
+{
+  "name": "noodle",
+  "version": "0.0.1",
+  "description": "the 13kjs game for team noodle",
+  "source": "src/index.html",
+  "scripts": {
+    "start": "parcel serve --port 7227 src/index.html",
+    "build": "bin/build.sh"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "archiver": "^6.0.0",
+    "parcel": "^2.9.3"
+  }
+}
