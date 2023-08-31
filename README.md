@@ -17,3 +17,12 @@ time.
 ```
 npm start
 ```
+
+### Tests
+
+All of our tests use [QUnit](https://qunitjs.com/).
+
+After running `npm start` you can go to https://localhost:7227/tests.html to run the tests.
+
+Look in the `src/js/tests/` directory to find the tests. The `src/js/tests/main.js` is the entry
+point for all of our test modules.
