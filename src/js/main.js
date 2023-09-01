@@ -27,7 +27,7 @@ import Game from "./Game.js";
   addBuildingEl.addEventListener("click", () => {
     isAddingBuilding = !isAddingBuilding;
 
-    if (isAddingBuilding) {
+    if (!isAddingBuilding) {
       addBuildingEl.innerText = "Off";
     } else {
       addBuildingEl.innerText = "On";
