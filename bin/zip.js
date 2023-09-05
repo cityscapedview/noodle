@@ -25,7 +25,8 @@ const LIMIT = 13 * 1024;
 
 (async () => {
   try {
-    const packageSize = await zip("build/bundled", "build/zipped/noodle.zip");
+    const args = process.argv.slice(2);
+    const packageSize = await zip(args[0], args[1]);
     console.log(
       `Package: ${packageSize} byte / ${(packageSize
         ? (packageSize / LIMIT) * 100
