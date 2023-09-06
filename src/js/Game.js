@@ -14,6 +14,7 @@ export default class Game {
   #cellsY = 8;
   #zIndexSize = 10;
   #gameObjects = [];
+  #scoreTracker = 0;
 
   #isAddingBuilding = false;
 
@@ -31,6 +32,10 @@ export default class Game {
 
   get zIndexSize() {
     return this.#zIndexSize;
+  }
+
+  get scoreTracker() {
+    return this.#scoreTracker;
   }
 
   async start() {
@@ -107,6 +112,8 @@ export default class Game {
       });
       if (Math.random() > 0.85) {
         objectAtCell.extinguish();
+        this.#scoreTracker += 25;
+        console.log(this.#scoreTracker);
       }
     } else if (Math.random() > 0.8) {
       this.addGameObject("BITTY_BUD", cellX, cellY);
