@@ -103,9 +103,11 @@ export default class Game {
       }
     } else if (objectAtCell instanceof BittyBudGameObject) {
       this.addGameObject("TAP", cellX, cellY, {
-        ignite: true,
+        ignite: false,
       });
-      objectAtCell.ignite();
+      if (Math.random() > 0.85) {
+        objectAtCell.extinguish();
+      }
     } else if (Math.random() > 0.8) {
       this.addGameObject("BITTY_BUD", cellX, cellY);
     } else {
