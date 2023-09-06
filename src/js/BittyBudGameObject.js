@@ -100,6 +100,10 @@ export default class BittyBudGameObject {
     this.#dieAfterFrames = dieAfterFrames;
   }
 
+  extinguish() {
+    this.#isIgnited = false;
+  }
+
   getRenderState() {
     const s = [
       {
