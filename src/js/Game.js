@@ -16,6 +16,7 @@ export default class Game {
   #gameObjects = [];
 
   #isAddingBuilding = false;
+  #maxNumBuildings = 4;
 
   constructor(gameEl) {
     this.#gameEl = gameEl;
@@ -43,6 +44,8 @@ export default class Game {
     });
     await renderer.init(SPRITES);
 
+    this.setupBuildings();
+
     let lastTime = 0;
     // Use 999 to force a render on the first frame
     let frameTimer = 999;
@@ -65,6 +68,18 @@ export default class Game {
 
     // Start our game loop
     await tick(0);
+  }
+
+  // Randomly add buildings up to the set maximum
+  setupBuildings() {
+    let i = 0;
+    while (i < this.#maxNumBuildings) {
+      const randX = Math.floor(Math.random() * this.#cellsX);
+      const randY = Math.floor(Math.random() * this.#cellsY);
+      if (this.addGameObject("BUILDING", randX, randY) !== false) {
+        i++;
+      }
+    }
   }
 
   zoomCamera(direction) {
@@ -135,7 +150,7 @@ export default class Game {
         [cellX, cellY + 1],
         [cellX + 1, cellY + 1],
       ];
-      if (blockedCells.some(([x, y]) => this.isCellBlocked(x, y))) return;
+      if (blockedCells.some(([x, y]) => this.isCellBlocked(x, y))) return false;
       gameObject = new BuildingGameObject(this, cellX, cellY, options);
     }
     this.#gameObjects = [...this.#gameObjects, gameObject];
