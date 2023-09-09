@@ -110,10 +110,12 @@ export default class Game {
       this.addGameObject("TAP", cellX, cellY, {
         ignite: false,
       });
-      if (Math.random() > 0.85) {
-        objectAtCell.extinguish();
-        this.#scoreTracker += 25;
-        console.log(this.#scoreTracker);
+      if (objectAtCell.isIgnited()) {
+        if (Math.random() > 0.85) {
+          objectAtCell.extinguish();
+          this.#scoreTracker += 35;
+          console.log(this.#scoreTracker);
+        }
       }
     } else if (Math.random() > 0.8) {
       this.addGameObject("BITTY_BUD", cellX, cellY);

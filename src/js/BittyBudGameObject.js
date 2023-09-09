@@ -100,6 +100,12 @@ export default class BittyBudGameObject {
     this.#dieAfterFrames = dieAfterFrames;
   }
 
+  isIgnited() {
+    if (this.#isIgnited) {
+      return true;
+    }
+  }
+
   extinguish() {
     this.#isIgnited = false;
   }
