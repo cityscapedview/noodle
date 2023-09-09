@@ -35,6 +35,13 @@ import Game from "./Game.js";
     game.setIsAddingBuilding(isAddingBuilding);
   });
 
+  const scoreScreen = document.querySelector("#score-tracker");
+  let scoreTracker = game.scoreTracker();
+
+  scoreScreen.innerText = scoreTracker;
+
+  console.log(game.scoreTracker());
+
   gameboard.addEventListener("click", (e) => {
     if (!e.target.matches("#gameboard-canvas")) {
       return;

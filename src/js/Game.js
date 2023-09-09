@@ -14,7 +14,7 @@ export default class Game {
   #cellsY = 8;
   #zIndexSize = 10;
   #gameObjects = [];
-  #scoreTracker = 0;
+  #scoreTracker = 400;
 
   #isAddingBuilding = false;
 
@@ -130,6 +130,10 @@ export default class Game {
 
   getGameObjectAt(cellX, cellY) {
     return this.#gameObjects.find((g) => g.isAt(cellX, cellY));
+  }
+
+  scoreTracker() {
+    return this.#scoreTracker;
   }
 
   addGameObject(type, cellX, cellY, options = {}) {
