@@ -101,9 +101,7 @@ export default class BittyBudGameObject {
   }
 
   isIgnited() {
-    if (this.#isIgnited) {
-      return true;
-    }
+    return this.#isIgnited;
   }
 
   extinguish() {
