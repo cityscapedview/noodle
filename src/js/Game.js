@@ -108,7 +108,7 @@ export default class Game {
     const objectAtCell = this.getGameObjectAt(cellX, cellY);
     if (objectAtCell instanceof BuildingGameObject) {
       // if it's on fire, put that baby out
-      if (objectAtCell.buildingIgnitedCheck(cellX, cellY)) {
+      if (objectAtCell.isBuildingIgnited(cellX, cellY)) {
         if (Math.random() > 0.85) {
           objectAtCell.extinguish(cellX, cellY);
           this.addGameObject("TAP", cellX, cellY, { ignite: false });

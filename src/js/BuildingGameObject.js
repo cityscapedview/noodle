@@ -46,16 +46,14 @@ export default class BuildingGameObject {
     return true;
   }
 
-  buildingIgnitedCheck(cellX, cellY) {
+  isBuildingIgnited(cellX, cellY) {
     const key = Object.keys(this.#positions).find(
       (key) =>
         this.#positions[key].position[0] === cellX &&
         this.#positions[key].position[1] === cellY
     );
-    if (this.#positions[key].isIgnited === true) {
-      console.log("it's on fire.");
-      return true;
-    }
+    console.log(this.#positions[key].isIgnited);
+    return this.#positions[key].isIgnited;
   }
 
   extinguish(cellX, cellY) {
