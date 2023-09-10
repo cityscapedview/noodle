@@ -102,7 +102,7 @@ canvas {
   transform: translateX(2px) translateY(1px);
 }
 
-.score {
+.scoreboard {
   font-family: inherit;
   font-size: inherit;
   border: 1px solid black;
