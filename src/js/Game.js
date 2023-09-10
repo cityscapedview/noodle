@@ -89,9 +89,11 @@ export default class Game {
     // add a bitty bud if they click a random number of times
     const objectAtCell = this.getGameObjectAt(cellX, cellY);
     if (objectAtCell instanceof BuildingGameObject) {
-      this.addGameObject("TAP", cellX, cellY, {
-        ignite: true,
-      });
+      // show some fire
+      this.addGameObject("TAP", cellX, cellY, { ignite: true });
+      // ignite the building
+      objectAtCell.ignite(cellX, cellY);
+
       if (Math.random() > 0.5) {
         const safeCell = this.getClosestEmptyCell(cellX, cellY);
         if (safeCell) {
