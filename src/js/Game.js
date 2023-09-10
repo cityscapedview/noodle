@@ -109,8 +109,11 @@ export default class Game {
     if (objectAtCell instanceof BuildingGameObject) {
       // if it's on fire, put that baby out
       if (objectAtCell.buildingIgnitedCheck(cellX, cellY)) {
-        objectAtCell.extinguish(cellX, cellY);
-        this.addGameObject("TAP", cellX, cellY, { ignite: false });
+        if (Math.random() > 0.85) {
+          objectAtCell.extinguish(cellX, cellY);
+          this.addGameObject("TAP", cellX, cellY, { ignite: false });
+          this.#increaseScore(15);
+        }
       } else {
         // show some fire
         this.addGameObject("TAP", cellX, cellY, { ignite: true });
