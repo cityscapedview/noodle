@@ -102,6 +102,17 @@ canvas {
   transform: translateX(2px) translateY(1px);
 }
 
+.score {
+  font-family: inherit;
+  font-size: inherit;
+  border: 1px solid black;
+  background: black;
+  color: white;
+  padding: 0.25rem;
+  margin-bottom: 0.25rem;
+  outline: 2px solid #a08733;
+}
+
 button {
   font-family: inherit;
   font-size: inherit;
