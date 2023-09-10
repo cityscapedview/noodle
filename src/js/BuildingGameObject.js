@@ -46,6 +46,28 @@ export default class BuildingGameObject {
     return true;
   }
 
+  buildingIgnitedCheck(cellX, cellY) {
+    const key = Object.keys(this.#positions).find(
+      (key) =>
+        this.#positions[key].position[0] === cellX &&
+        this.#positions[key].position[1] === cellY
+    );
+    if (this.#positions[key].isIgnited === true) {
+      console.log("it's on fire.");
+      return true;
+    }
+  }
+
+  extinguish(cellX, cellY) {
+    const key = Object.keys(this.#positions).find(
+      (key) =>
+        this.#positions[key].position[0] === cellX &&
+        this.#positions[key].position[1] === cellY
+    );
+    console.log("it's extinguished");
+    this.#positions[key].isIgnited = false;
+  }
+
   ignite(cellX, cellY) {
     const key = Object.keys(this.#positions).find(
       (key) =>
