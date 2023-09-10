@@ -2,7 +2,8 @@ import Game from "./Game.js";
 
 (async () => {
   const gameboard = document.querySelector("#gameboard");
-  const game = new Game(gameboard);
+  const scoreEl = document.querySelector("#score-tracker");
+  const game = new Game(gameboard, scoreEl);
 
   await game.start();
 
@@ -34,13 +35,6 @@ import Game from "./Game.js";
     }
     game.setIsAddingBuilding(isAddingBuilding);
   });
-
-  const scoreScreen = document.querySelector("#score-tracker");
-  let scoreTracker = game.scoreTracker();
-
-  scoreScreen.innerText = scoreTracker;
-
-  console.log(game.scoreTracker());
 
   gameboard.addEventListener("click", (e) => {
     if (!e.target.matches("#gameboard-canvas")) {

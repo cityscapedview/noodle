@@ -7,6 +7,7 @@ import { SPRITES } from "./constants.js";
 
 export default class Game {
   #gameEl;
+  #scoreEl;
   #fps = 60;
   #camera;
   #cellSize = 8;
@@ -14,12 +15,13 @@ export default class Game {
   #cellsY = 8;
   #zIndexSize = 10;
   #gameObjects = [];
-  #scoreTracker = 400;
+  #score = 0;
 
   #isAddingBuilding = false;
 
-  constructor(gameEl) {
+  constructor(gameEl, scoreEl) {
     this.#gameEl = gameEl;
+    this.#scoreEl = scoreEl;
   }
 
   get cellsX() {
@@ -32,10 +34,6 @@ export default class Game {
 
   get zIndexSize() {
     return this.#zIndexSize;
-  }
-
-  get scoreTracker() {
-    return this.#scoreTracker;
   }
 
   async start() {
@@ -113,8 +111,8 @@ export default class Game {
       if (objectAtCell.isIgnited()) {
         if (Math.random() > 0.85) {
           objectAtCell.extinguish();
-          this.#scoreTracker += 35;
-          console.log(this.#scoreTracker);
+          this.#increaseScore(35);
+          console.log(this.#score);
         }
       }
     } else if (Math.random() > 0.8) {
@@ -132,8 +130,13 @@ export default class Game {
     return this.#gameObjects.find((g) => g.isAt(cellX, cellY));
   }
 
-  scoreTracker() {
-    return this.#scoreTracker;
+  returnScore() {
+    return this.#score;
+  }
+
+  #increaseScore(increment) {
+    this.#score += increment;
+    this.#scoreEl.innerText = this.#score;
   }
 
   addGameObject(type, cellX, cellY, options = {}) {
