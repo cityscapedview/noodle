@@ -7,6 +7,7 @@ import { SPRITES } from "./constants.js";
 
 export default class Game {
   #gameEl;
+  #scoreEl;
   #fps = 60;
   #camera;
   #cellSize = 8;
@@ -14,11 +15,14 @@ export default class Game {
   #cellsY = 8;
   #zIndexSize = 10;
   #gameObjects = [];
+  #score = 0;
 
   #isAddingBuilding = false;
+  #maxNumBuildings = 4;
 
-  constructor(gameEl) {
+  constructor(gameEl, scoreEl) {
     this.#gameEl = gameEl;
+    this.#scoreEl = scoreEl;
   }
 
   get cellsX() {
@@ -43,6 +47,8 @@ export default class Game {
     });
     await renderer.init(SPRITES);
 
+    this.setupBuildings();
+
     let lastTime = 0;
     // Use 999 to force a render on the first frame
     let frameTimer = 999;
@@ -65,6 +71,18 @@ export default class Game {
 
     // Start our game loop
     await tick(0);
+  }
+
+  // Randomly add buildings up to the set maximum
+  setupBuildings() {
+    let i = 0;
+    while (i < this.#maxNumBuildings) {
+      const randX = Math.floor(Math.random() * this.#cellsX);
+      const randY = Math.floor(Math.random() * this.#cellsY);
+      if (this.addGameObject("BUILDING", randX, randY) !== false) {
+        i++;
+      }
+    }
   }
 
   zoomCamera(direction) {
@@ -103,9 +121,15 @@ export default class Game {
       }
     } else if (objectAtCell instanceof BittyBudGameObject) {
       this.addGameObject("TAP", cellX, cellY, {
-        ignite: true,
+        ignite: false,
       });
-      objectAtCell.ignite();
+      if (objectAtCell.isIgnited()) {
+        if (Math.random() > 0.85) {
+          objectAtCell.extinguish();
+          this.#increaseScore(35);
+          console.log(this.#score);
+        }
+      }
     } else if (Math.random() > 0.8) {
       this.addGameObject("BITTY_BUD", cellX, cellY);
     } else {
@@ -119,6 +143,11 @@ export default class Game {
 
   getGameObjectAt(cellX, cellY) {
     return this.#gameObjects.find((g) => g.isAt(cellX, cellY));
+  }
+
+  #increaseScore(increment) {
+    this.#score += increment;
+    this.#scoreEl.innerText = this.#score;
   }
 
   addGameObject(type, cellX, cellY, options = {}) {
@@ -135,7 +164,7 @@ export default class Game {
         [cellX, cellY + 1],
         [cellX + 1, cellY + 1],
       ];
-      if (blockedCells.some(([x, y]) => this.isCellBlocked(x, y))) return;
+      if (blockedCells.some(([x, y]) => this.isCellBlocked(x, y))) return false;
       gameObject = new BuildingGameObject(this, cellX, cellY, options);
     }
     this.#gameObjects = [...this.#gameObjects, gameObject];
