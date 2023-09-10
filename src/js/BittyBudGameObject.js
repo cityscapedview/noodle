@@ -98,6 +98,16 @@ export default class BittyBudGameObject {
     this.#isIgnited = true;
     this.#ticksUntilNextMove = 0;
     this.#dieAfterFrames = dieAfterFrames;
+    this.#aliveFrames = 1;
+  }
+
+  isIgnited() {
+    return this.#isIgnited;
+  }
+
+  extinguish() {
+    this.#isIgnited = false;
+    this.#ticksUntilNextMove = 0;
   }
 
   getRenderState() {

@@ -7,6 +7,7 @@ import { SPRITES } from "./constants.js";
 
 export default class Game {
   #gameEl;
+  #scoreEl;
   #fps = 60;
   #camera;
   #cellSize = 8;
@@ -14,12 +15,14 @@ export default class Game {
   #cellsY = 8;
   #zIndexSize = 10;
   #gameObjects = [];
+  #score = 0;
 
   #isAddingBuilding = false;
   #maxNumBuildings = 4;
 
-  constructor(gameEl) {
+  constructor(gameEl, scoreEl) {
     this.#gameEl = gameEl;
+    this.#scoreEl = scoreEl;
   }
 
   get cellsX() {
@@ -118,9 +121,15 @@ export default class Game {
       }
     } else if (objectAtCell instanceof BittyBudGameObject) {
       this.addGameObject("TAP", cellX, cellY, {
-        ignite: true,
+        ignite: false,
       });
-      objectAtCell.ignite();
+      if (objectAtCell.isIgnited()) {
+        if (Math.random() > 0.85) {
+          objectAtCell.extinguish();
+          this.#increaseScore(35);
+          console.log(this.#score);
+        }
+      }
     } else if (Math.random() > 0.8) {
       this.addGameObject("BITTY_BUD", cellX, cellY);
     } else {
@@ -134,6 +143,11 @@ export default class Game {
 
   getGameObjectAt(cellX, cellY) {
     return this.#gameObjects.find((g) => g.isAt(cellX, cellY));
+  }
+
+  #increaseScore(increment) {
+    this.#score += increment;
+    this.#scoreEl.innerText = this.#score;
   }
 
   addGameObject(type, cellX, cellY, options = {}) {

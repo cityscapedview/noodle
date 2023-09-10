@@ -102,6 +102,20 @@ canvas {
   transform: translateX(2px) translateY(1px);
 }
 
+.scoreboard {
+  font-family: inherit;
+  font-size: inherit;
+  border: 1px solid black;
+  background: black;
+  color: white;
+  padding: 0.25rem;
+  margin-bottom: 0.25rem;
+  outline: 2px solid #a08733;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 button {
   font-family: inherit;
   font-size: inherit;

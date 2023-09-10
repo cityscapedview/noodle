@@ -2,7 +2,8 @@ import Game from "./Game.js";
 
 (async () => {
   const gameboard = document.querySelector("#gameboard");
-  const game = new Game(gameboard);
+  const scoreEl = document.querySelector("#score-tracker");
+  const game = new Game(gameboard, scoreEl);
 
   await game.start();
 
