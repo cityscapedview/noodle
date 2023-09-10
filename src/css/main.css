@@ -111,6 +111,9 @@ canvas {
   padding: 0.25rem;
   margin-bottom: 0.25rem;
   outline: 2px solid #a08733;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 button {
