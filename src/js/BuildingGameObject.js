@@ -56,13 +56,11 @@ export default class BuildingGameObject {
 
   isBuildingIgnited(cellX, cellY) {
     findKey();
-    console.log(this.#positions[key].isIgnited);
     return this.#positions[key].isIgnited;
   }
 
   extinguish(cellX, cellY) {
     findKey();
-    console.log("it's extinguished");
     this.#positions[key].isIgnited = false;
   }
 

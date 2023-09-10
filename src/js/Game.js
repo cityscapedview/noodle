@@ -137,7 +137,6 @@ export default class Game {
         if (Math.random() > 0.85) {
           objectAtCell.extinguish();
           this.#increaseScore(35);
-          console.log(this.#score);
         }
       }
     } else if (Math.random() > 0.8) {
