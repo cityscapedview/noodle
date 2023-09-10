@@ -358,25 +358,25 @@ export const SPRITES = {
     sheetX: 3,
     sheetY: 3,
   },
-  BLDG_POST_0_0: {
+  BLDG_POST_TOP_LEFT: {
     spriteSheet: bldgPostSpriteSheetURL,
     size: 8,
     sheetX: 0,
     sheetY: 0,
   },
-  BLDG_POST_1_0: {
+  BLDG_POST_TOP_RIGHT: {
     spriteSheet: bldgPostSpriteSheetURL,
     size: 8,
     sheetX: 1,
     sheetY: 0,
   },
-  BLDG_POST_0_1: {
+  BLDG_POST_BOTTOM_LEFT: {
     spriteSheet: bldgPostSpriteSheetURL,
     size: 8,
     sheetX: 2,
     sheetY: 0,
   },
-  BLDG_POST_1_1: {
+  BLDG_POST_BOTTOM_RIGHT: {
     spriteSheet: bldgPostSpriteSheetURL,
     size: 8,
     sheetX: 3,
