@@ -5,7 +5,7 @@
   "source": "src/index.html",
   "scripts": {
     "start": "parcel serve --port 7227 src/index.html src/title-page.html src/tests.html",
-    "build": "rimraf build && mkdirp build/zipped build/bundled && parcel build --no-source-maps --dist-dir build/bundled src/index.html && bin/zip.js build/bundled build/zipped/noodle.zip"
+    "build": "rimraf build && mkdirp build/zipped build/bundled && parcel build --no-source-maps --dist-dir build/bundled src/index.html && node scripts/zip.js build/bundled build/zipped/noodle.zip"
   },
   "license": "MIT",
   "devDependencies": {

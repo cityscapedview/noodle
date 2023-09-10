@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 const archiver = require("archiver");
 const fs = require("fs");
 
@@ -26,12 +25,13 @@ const LIMIT = 13 * 1024;
 (async () => {
   try {
     const args = process.argv.slice(2);
+    console.log("\n", "✨", "zipping", args[0], "to", args[1], "...\n");
     const packageSize = await zip(args[0], args[1]);
     console.log(
-      `Package: ${packageSize} byte / ${(packageSize
+      `13kjs Package Size: ${packageSize} byte / ${(packageSize
         ? (packageSize / LIMIT) * 100
         : 0
-      ).toFixed(2)}%`
+      ).toFixed(2)}%\n`
     );
   } catch (error) {
     console.error("zip error", error);
