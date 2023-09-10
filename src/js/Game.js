@@ -130,10 +130,6 @@ export default class Game {
     return this.#gameObjects.find((g) => g.isAt(cellX, cellY));
   }
 
-  returnScore() {
-    return this.#score;
-  }
-
   #increaseScore(increment) {
     this.#score += increment;
     this.#scoreEl.innerText = this.#score;
