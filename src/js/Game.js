@@ -4,7 +4,7 @@ import TapGameObject from "./TapGameObject.js";
 import BittyBudGameObject from "./BittyBudGameObject.js";
 import BuildingGameObject from "./BuildingGameObject.js";
 import { SPRITES } from "./constants.js";
-import DragonHandler from "./DragonHandler.js";
+import DragonGameObject from "./DragonGameObject.js";
 
 export default class Game {
   #gameEl;
@@ -41,6 +41,14 @@ export default class Game {
     return this.#zIndexSize;
   }
 
+  get dragonInterval() {
+    return this.#dragonInterval;
+  }
+
+  get dragonDelay() {
+    return this.#dragonDelay;
+  }
+
   async start() {
     this.#camera = Camera.create(this);
 
@@ -52,10 +60,7 @@ export default class Game {
     await renderer.init(SPRITES);
 
     this.setupBuildings();
-    const dragon = new DragonHandler(this.#cellsX, this.#cellsY, {
-      interval: this.#dragonInterval,
-      delay: this.#dragonDelay,
-    });
+    this.#gameObjects = [...this.#gameObjects, new DragonGameObject(this)];
 
     let lastTime = 0;
     // Use 999 to force a render on the first frame
@@ -66,33 +71,8 @@ export default class Game {
       if (frameTimer < 1000 / this.#fps) {
         frameTimer += deltaTime;
       } else {
-        const fire = dragon.addFire(t);
-        if (fire) {
-          const objectAtCell = this.getGameObjectAt(fire.x, fire.y);
-          if (objectAtCell instanceof BuildingGameObject) {
-            this.addGameObject("TAP", fire.x, fire.y, { ignite: true })
-            objectAtCell.ignite(fire.x, fire.y);
-
-            if (Math.random() > 0.5) {
-              const safeCell = this.getClosestEmptyCell(fire.x, fire.y);
-              if (safeCell) {
-                this.addGameObject("BITTY_BUD", safeCell[0], safeCell[1], {
-                  ignite: Math.random() > 0.5,
-                });
-                this.addGameObject("TAP", safeCell[0], safeCell[1]);
-              }
-            }
-          } else if (objectAtCell instanceof BittyBudGameObject) {
-            objectAtCell.ignite();
-          } else {
-            this.addGameObject("TAP", fire.x, fire.y, {
-              ignite: true,
-            });
-          }
-        }
-
         // Update game objects
-        this.#gameObjects.forEach((g) => g.update(deltaTime));
+        this.#gameObjects.forEach((g) => g.update(t));
 
         // Re-render the game every x frames per second
         await renderer.render(this.#getRenderState());
@@ -203,6 +183,8 @@ export default class Game {
       gameObject = new BuildingGameObject(this, cellX, cellY, options);
     }
     this.#gameObjects = [...this.#gameObjects, gameObject];
+
+    return gameObject;
   }
 
   removeGameObject(gameObjectID, explodeAt = null) {

@@ -20,6 +20,10 @@ const bldgPostSpriteSheetURL = new URL(
   "../images/bldg-post-sprite-sheet.png",
   import.meta.url
 ).href;
+const dragonSpriteSheetURL = new URL(
+  "../images/dragon-shade-sprite-sheet.png",
+  import.meta.url
+).href;
 
 export const SPRITES = {
   GRASS_1: {
@@ -382,4 +386,28 @@ export const SPRITES = {
     sheetX: 3,
     sheetY: 0,
   },
+  DRAGON_TOP_LEFT: {
+    spriteSheet: dragonSpriteSheetURL,
+    size: 16,
+    sheetX: 0,
+    sheetY: 0,
+  },
+  DRAGON_TOP_RIGHT: {
+    spriteSheet: dragonSpriteSheetURL,
+    size: 16,
+    sheetX: 1,
+    sheetY: 0,
+  },
+  DRAGON_BOTTOM_LEFT: {
+    spriteSheet: dragonSpriteSheetURL,
+    size: 16,
+    sheetX: 0,
+    sheetY: 1,
+  },
+  DRAGON_BOTTOM_RIGHT: {
+    spriteSheet: dragonSpriteSheetURL,
+    size: 16,
+    sheetX: 1,
+    sheetY: 1,
+  }
 };
