@@ -7,8 +7,8 @@ export default class DragonGameObject {
   #cellY = -1;
   #gameObjectID;
   #lastTime = 0;
-  #maxX = 8;
-  #maxY = 8;
+  #maxX;
+  #maxY;
   #pos;
   #delayTime = 0;
   #delayed = false;
@@ -71,9 +71,9 @@ export default class DragonGameObject {
 
       if (
         this.#cellX < 0 ||
-        this.#cellX > 7 ||
+        this.#cellX > this.#maxX - 1 ||
         this.#cellY < 0 ||
-        this.#cellY > 7
+        this.#cellY > this.#maxY - 1
       ) {
         this.#startPos();
         this.#delayTime = t;
