@@ -4,6 +4,7 @@ import TapGameObject from "./TapGameObject.js";
 import BittyBudGameObject from "./BittyBudGameObject.js";
 import BuildingGameObject from "./BuildingGameObject.js";
 import { SPRITES } from "./constants.js";
+import DragonGameObject from "./DragonGameObject.js";
 
 export default class Game {
   #gameEl;
@@ -19,6 +20,9 @@ export default class Game {
 
   #isAddingBuilding = false;
   #maxNumBuildings = 4;
+
+  #dragonInterval = .2;
+  #dragonDelay = 1;
 
   constructor(gameEl, scoreEl) {
     this.#gameEl = gameEl;
@@ -37,6 +41,14 @@ export default class Game {
     return this.#zIndexSize;
   }
 
+  get dragonInterval() {
+    return this.#dragonInterval;
+  }
+
+  get dragonDelay() {
+    return this.#dragonDelay;
+  }
+
   async start() {
     this.#camera = Camera.create(this);
 
@@ -48,6 +60,7 @@ export default class Game {
     await renderer.init(SPRITES);
 
     this.setupBuildings();
+    this.#gameObjects = [...this.#gameObjects, new DragonGameObject(this)];
 
     let lastTime = 0;
     // Use 999 to force a render on the first frame
@@ -59,7 +72,7 @@ export default class Game {
         frameTimer += deltaTime;
       } else {
         // Update game objects
-        this.#gameObjects.forEach((g) => g.update(deltaTime));
+        this.#gameObjects.forEach((g) => g.update(t));
 
         // Re-render the game every x frames per second
         await renderer.render(this.#getRenderState());
@@ -177,6 +190,8 @@ export default class Game {
       gameObject = new BuildingGameObject(this, cellX, cellY, options);
     }
     this.#gameObjects = [...this.#gameObjects, gameObject];
+
+    return gameObject;
   }
 
   removeGameObject(gameObjectID, explodeAt = null) {
