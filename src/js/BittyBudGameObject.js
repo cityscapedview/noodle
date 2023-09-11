@@ -94,7 +94,7 @@ export default class BittyBudGameObject {
     return this.#cellX === cellX && this.#cellY === cellY;
   }
 
-  ignite({ dieAfterFrames = 180 } = {}) {
+  ignite({ dieAfterFrames = 90 } = {}) {
     this.#isIgnited = true;
     this.#ticksUntilNextMove = 0;
     this.#dieAfterFrames = dieAfterFrames;
