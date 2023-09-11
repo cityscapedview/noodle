@@ -107,11 +107,19 @@ export default class Game {
     // add a bitty bud if they click a random number of times
     const objectAtCell = this.getGameObjectAt(cellX, cellY);
     if (objectAtCell instanceof BuildingGameObject) {
-      // show some fire
-      this.addGameObject("TAP", cellX, cellY, { ignite: true });
-      // ignite the building
-      objectAtCell.ignite(cellX, cellY);
-
+      // if it's on fire, put that baby out
+      if (objectAtCell.isBuildingIgnited(cellX, cellY)) {
+        if (Math.random() > 0.85) {
+          objectAtCell.extinguish(cellX, cellY);
+          this.addGameObject("TAP", cellX, cellY, { ignite: false });
+          this.#increaseScore(15);
+        }
+      } else {
+        // show some fire
+        this.addGameObject("TAP", cellX, cellY, { ignite: true });
+        // ignite the building
+        objectAtCell.ignite(cellX, cellY);
+      }
       if (Math.random() > 0.5) {
         const safeCell = this.getClosestEmptyCell(cellX, cellY);
         if (safeCell) {
@@ -129,7 +137,6 @@ export default class Game {
         if (Math.random() > 0.85) {
           objectAtCell.extinguish();
           this.#increaseScore(35);
-          console.log(this.#score);
         }
       }
     } else if (Math.random() > 0.8) {
