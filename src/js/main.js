@@ -3,7 +3,8 @@ import Game from "./Game.js";
 (async () => {
   const gameboard = document.querySelector("#gameboard");
   const scoreEl = document.querySelector("#score-tracker");
-  const game = new Game(gameboard, scoreEl);
+  const roundEl = document.querySelector("#round-tracker");
+  const game = new Game(gameboard, scoreEl, roundEl);
 
   await game.start();
 
@@ -22,19 +23,6 @@ import Game from "./Game.js";
 
   const cameraZoomEls = document.querySelectorAll("[data-camera-zoom]");
   cameraZoomEls.forEach((el) => el.addEventListener("click", handleCameraZoom));
-
-  let isAddingBuilding = false;
-  const addBuildingEl = document.querySelector("#add-building");
-  addBuildingEl.addEventListener("click", () => {
-    isAddingBuilding = !isAddingBuilding;
-
-    if (!isAddingBuilding) {
-      addBuildingEl.innerText = "Off";
-    } else {
-      addBuildingEl.innerText = "On";
-    }
-    game.setIsAddingBuilding(isAddingBuilding);
-  });
 
   gameboard.addEventListener("click", (e) => {
     if (!e.target.matches("#gameboard-canvas")) {
