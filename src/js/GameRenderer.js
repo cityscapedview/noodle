@@ -131,7 +131,7 @@ export default class GameRenderer {
     const cameraX = diffX - offsetX;
     const cameraY = diffY - offsetY;
 
-    this.#cameraEl.style.transform = `translate(${cameraX}px, ${cameraY}px) scale(${zoom})`;
+    this.#cameraEl.style.transform = `scale(${zoom})`;
   }
 
   #renderBackground(sprites, color) {

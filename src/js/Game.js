@@ -14,8 +14,8 @@ export default class Game {
   #fps = 60;
   #camera;
   #cellSize = 8;
-  #cellsX = 8;
-  #cellsY = 8;
+  #cellsX = 9;
+  #cellsY = 9;
   #zIndexSize = 10;
   #gameObjects = [];
   #score = 0;
@@ -55,6 +55,8 @@ export default class Game {
 
   async start() {
     this.#camera = Camera.create(this);
+    this.#camera.zoom("IN");
+    this.#camera.zoom("IN");
 
     const renderer = new GameRenderer(this.#gameEl, {
       cellSizePx: this.#cellSize,
