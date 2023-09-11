@@ -136,6 +136,10 @@ export default class DragonGameObject {
     return false;
   }
 
+  isGameOver() {
+    return true;
+  }
+
   getRenderState() {
     if (this.#delayed) {
       return [];

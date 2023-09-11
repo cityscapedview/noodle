@@ -49,6 +49,10 @@ export default class BuildingGameObject {
     return true;
   }
 
+  isGameOver() {
+    return this.#pieces.every((piece) => piece.hp === 0);
+  }
+
   isBuildingIgnited(cellX, cellY) {
     const piece = this.#findPieceAt(cellX, cellY);
     return piece.isIgnited;

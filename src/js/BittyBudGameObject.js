@@ -90,6 +90,10 @@ export default class BittyBudGameObject {
     return true;
   }
 
+  isGameOver() {
+    return true;
+  }
+
   isAt(cellX, cellY) {
     return this.#cellX === cellX && this.#cellY === cellY;
   }

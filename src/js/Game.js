@@ -85,6 +85,12 @@ export default class Game {
         lastTime = t;
       }
 
+      if (this.#isGameOver()) {
+        // TODO: Game over
+        console.log("GAME OVER");
+        return;
+      }
+
       requestAnimationFrame(tick);
     };
 
@@ -273,5 +279,9 @@ export default class Game {
         return newAcc;
       }, []),
     };
+  }
+
+  #isGameOver() {
+    return this.#gameObjects.every((gameObject) => gameObject.isGameOver());
   }
 }
