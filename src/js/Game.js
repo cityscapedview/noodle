@@ -55,6 +55,7 @@ export default class Game {
 
   async start() {
     this.#camera = Camera.create(this);
+    // Zoom in twice to make pixels fit perfectly - hax0r
     this.#camera.zoom("IN");
     this.#camera.zoom("IN");
 
@@ -67,6 +68,16 @@ export default class Game {
 
     this.setupBuildings();
     this.#gameObjects = [...this.#gameObjects, new DragonGameObject(this)];
+
+    this.#scoreEl.addEventListener("animationend", () => {
+      this.#scoreEl.classList.remove("animate__headShake");
+    });
+    this.#scoreEl.innerText = this.#score;
+
+    this.#roundEl.addEventListener("animationend", () => {
+      this.#roundEl.classList.remove("animate__headShake");
+    });
+    this.#roundEl.innerText = this.#round;
 
     let lastTime = 0;
     // Use 999 to force a render on the first frame
@@ -167,6 +178,7 @@ export default class Game {
   #increaseScore(increment) {
     this.#score += increment;
     this.#scoreEl.innerText = this.#score;
+    this.#scoreEl.classList.add("animate__headShake");
 
     if (this.#score / 100 >= this.#round) {
       this.#advanceRound();
@@ -176,14 +188,11 @@ export default class Game {
   #advanceRound() {
     this.#round++;
     this.#roundEl.innerText = this.#round;
+    this.#roundEl.classList.add("animate__headShake");
 
-    // reduce dragon delay in ms by a small amount each time no less than 100ms
+    // Make the dragoom go faster and faster
     this.#dragonInterval = Math.max(10, 200 * Math.pow(0.9, this.#round) + 10);
     this.#dragonDelay = Math.max(20, 990 * Math.pow(0.9, this.#round) + 10);
-
-    console.log("Round advanced to", this.#round);
-    console.log("Dragon delay is now", this.#dragonDelay);
-    console.log("Dragon interval is now", this.#dragonInterval);
   }
 
   addGameObject(type, cellX, cellY, options = {}) {
