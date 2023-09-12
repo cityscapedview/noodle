@@ -6,7 +6,17 @@ import Game from "./Game.js";
   const roundEl = document.querySelector("#round-tracker");
   const game = new Game(gameboard, scoreEl, roundEl);
 
-  await game.start();
+  const startButton = document.querySelector("#start-button");
+  const titleScreen = document.querySelector(".title-screen");
+  const scoreboard = document.querySelector(".scoreboard");
+
+  // Event listeners
+  startButton.addEventListener("click", async () => {
+    gameboard.classList.remove("hidden");
+    scoreboard.classList.remove("hidden");
+    titleScreen.classList.add("hidden");
+    await game.start();
+  });
 
   gameboard.addEventListener("click", (e) => {
     if (!e.target.matches("#gameboard-canvas")) {

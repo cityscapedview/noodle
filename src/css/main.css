@@ -43,6 +43,23 @@ canvas {
   transform: scale(var(--pixel-size));
 }
 
+.title-screen {
+  height: 75%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  letter-spacing: -3px;
+  margin-bottom: 2rem;
+  font-size: 40px;
+  text-decoration: underline;
+}
+
 .gameboard {
   width: var(--gameboard-width);
   height: var(--gameboard-height);
@@ -132,6 +149,10 @@ button {
   cursor: pointer;
   user-select: none;
   padding: 0.25rem;
+}
+
+.hidden {
+  display: none;
 }
 
 .animate__headShake {
