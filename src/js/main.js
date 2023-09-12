@@ -11,27 +11,12 @@ import Game from "./Game.js";
   const scoreboard = document.querySelector(".scoreboard");
 
   // Event listeners
-  startButton.addEventListener("click", async (e) => {
+  startButton.addEventListener("click", async () => {
     gameboard.classList.remove("hidden");
     scoreboard.classList.remove("hidden");
     titleScreen.classList.add("hidden");
     await game.start();
   });
-
-  const handleCameraZoom = (e) => {
-    const direction = e.target.dataset.cameraZoom;
-    game.zoomCamera(direction);
-  };
-  const handleCameraMove = (e) => {
-    const direction = e.target.dataset.cameraMove;
-    game.moveCamera(direction);
-  };
-
-  const cameraMoveEls = document.querySelectorAll("[data-camera-move]");
-  cameraMoveEls.forEach((el) => el.addEventListener("click", handleCameraMove));
-
-  const cameraZoomEls = document.querySelectorAll("[data-camera-zoom]");
-  cameraZoomEls.forEach((el) => el.addEventListener("click", handleCameraZoom));
 
   gameboard.addEventListener("click", (e) => {
     if (!e.target.matches("#gameboard-canvas")) {
