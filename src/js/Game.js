@@ -9,24 +9,28 @@ import DragonGameObject from "./DragonGameObject.js";
 export default class Game {
   #gameEl;
   #scoreEl;
+  #roundEl;
+
   #fps = 60;
   #camera;
   #cellSize = 8;
-  #cellsX = 8;
-  #cellsY = 8;
+  #cellsX = 9;
+  #cellsY = 9;
   #zIndexSize = 10;
   #gameObjects = [];
   #score = 0;
+  #round = 1;
 
   #isAddingBuilding = false;
   #maxNumBuildings = 4;
 
-  #dragonInterval = .2;
-  #dragonDelay = 1;
+  #dragonInterval = 200;
+  #dragonDelay = 1000;
 
-  constructor(gameEl, scoreEl) {
+  constructor(gameEl, scoreEl, roundEl) {
     this.#gameEl = gameEl;
     this.#scoreEl = scoreEl;
+    this.#roundEl = roundEl;
   }
 
   get cellsX() {
@@ -51,6 +55,9 @@ export default class Game {
 
   async start() {
     this.#camera = Camera.create(this);
+    // Zoom in twice to make pixels fit perfectly - hax0r
+    this.#camera.zoom("IN");
+    this.#camera.zoom("IN");
 
     const renderer = new GameRenderer(this.#gameEl, {
       cellSizePx: this.#cellSize,
@@ -62,12 +69,21 @@ export default class Game {
     this.setupBuildings();
     this.#gameObjects = [...this.#gameObjects, new DragonGameObject(this)];
 
+    this.#scoreEl.addEventListener("animationend", () => {
+      this.#scoreEl.classList.remove("animate__headShake");
+    });
+    this.#scoreEl.innerText = this.#score;
+
+    this.#roundEl.addEventListener("animationend", () => {
+      this.#roundEl.classList.remove("animate__headShake");
+    });
+    this.#roundEl.innerText = this.#round;
+
     let lastTime = 0;
     // Use 999 to force a render on the first frame
     let frameTimer = 999;
     const tick = async (t) => {
       const deltaTime = t - lastTime;
-      lastTime = t;
       if (frameTimer < 1000 / this.#fps) {
         frameTimer += deltaTime;
       } else {
@@ -77,6 +93,13 @@ export default class Game {
         // Re-render the game every x frames per second
         await renderer.render(this.#getRenderState());
         frameTimer = 0;
+        lastTime = t;
+      }
+
+      if (this.#isGameOver()) {
+        // TODO: Game over
+        console.log("GAME OVER");
+        return;
       }
 
       requestAnimationFrame(tick);
@@ -121,26 +144,13 @@ export default class Game {
     const objectAtCell = this.getGameObjectAt(cellX, cellY);
     if (objectAtCell instanceof BuildingGameObject) {
       // if it's on fire, put that baby out
-      if (objectAtCell.isBuildingIgnited(cellX, cellY)) {
-        if (Math.random() > 0.85) {
-          objectAtCell.extinguish(cellX, cellY);
-          this.addGameObject("TAP", cellX, cellY, { ignite: false });
-          this.#increaseScore(15);
-        }
-      } else {
-        // show some fire
-        this.addGameObject("TAP", cellX, cellY, { ignite: true });
-        // ignite the building
-        objectAtCell.ignite(cellX, cellY);
-      }
-      if (Math.random() > 0.5) {
-        const safeCell = this.getClosestEmptyCell(cellX, cellY);
-        if (safeCell) {
-          this.addGameObject("BITTY_BUD", safeCell[0], safeCell[1], {
-            ignite: Math.random() > 0.5,
-          });
-          this.addGameObject("TAP", safeCell[0], safeCell[1]);
-        }
+      this.addGameObject("TAP", cellX, cellY);
+      if (
+        objectAtCell.isAlive(cellX, cellY) &&
+        objectAtCell.isBuildingIgnited(cellX, cellY)
+      ) {
+        objectAtCell.extinguish(cellX, cellY);
+        this.#increaseScore(20);
       }
     } else if (objectAtCell instanceof BittyBudGameObject) {
       this.addGameObject("TAP", cellX, cellY, {
@@ -149,11 +159,9 @@ export default class Game {
       if (objectAtCell.isIgnited()) {
         if (Math.random() > 0.85) {
           objectAtCell.extinguish();
-          this.#increaseScore(35);
+          this.#increaseScore(25);
         }
       }
-    } else if (Math.random() > 0.8) {
-      this.addGameObject("BITTY_BUD", cellX, cellY);
     } else {
       this.addGameObject("TAP", cellX, cellY);
     }
@@ -170,6 +178,21 @@ export default class Game {
   #increaseScore(increment) {
     this.#score += increment;
     this.#scoreEl.innerText = this.#score;
+    this.#scoreEl.classList.add("animate__headShake");
+
+    if (this.#score / 100 >= this.#round) {
+      this.#advanceRound();
+    }
+  }
+
+  #advanceRound() {
+    this.#round++;
+    this.#roundEl.innerText = this.#round;
+    this.#roundEl.classList.add("animate__headShake");
+
+    // Make the dragoom go faster and faster
+    this.#dragonInterval = Math.max(10, 200 * Math.pow(0.9, this.#round) + 10);
+    this.#dragonDelay = Math.max(20, 990 * Math.pow(0.9, this.#round) + 10);
   }
 
   addGameObject(type, cellX, cellY, options = {}) {
@@ -265,5 +288,9 @@ export default class Game {
         return newAcc;
       }, []),
     };
+  }
+
+  #isGameOver() {
+    return this.#gameObjects.every((gameObject) => gameObject.isGameOver());
   }
 }

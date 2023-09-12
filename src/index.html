@@ -14,33 +14,14 @@
     <div class="game-container">
       <div class="game">
         <div class="gameboard" id="gameboard"></div>
-        <div class="camera-controls">
-          <div class="camera-controls__zoom">
-            <button data-camera-zoom="IN">&#43;</button>
-            <button data-camera-zoom="OUT">&ndash;</button>
-          </div>
-          <div class="camera-controls__move">
-            <button data-camera-move="UP">&#9650;</button>
-            <button data-camera-move="DOWN">&#9660;</button>
-            <button data-camera-move="LEFT">&#9664;</button>
-            <button data-camera-move="RIGHT">&#9654;</button>
-          </div>
-        </div>
         <div class="scoreboard">
-          <div class="">
-            <label for="score-tracker">Score:</label>
-            <label id="score-tracker">0</label>
+          <div class="scoreboard-panel">
+            <div for="score-tracker">Score</div>
+            <div id="score-tracker">-</div>
           </div>
-          <div>
-            <label for="round-tracker">Round:</label>
-            <label id="round-tracker">0</label>
-          </div>
-        </div>
-        <div>
-          <div>
-            <h3>Dev Controls</h3>
-            <label for="add-building">Add Buildings</label>
-            <button id="add-building">Off</button>
+          <div class="scoreboard-panel">
+            <div for="round-tracker">Round</div>
+            <div id="round-tracker">-</div>
           </div>
         </div>
       </div>

@@ -103,35 +103,8 @@ export default class GameRenderer {
     return camera;
   }
 
-  #updateCamera([cellX, cellY], zoom) {
-    const midCellX = Math.ceil(this.#cols / 2);
-    const midCellY = Math.ceil(this.#rows / 2);
-
-    let diffX;
-    let diffY;
-    let offsetX = (this.#cellSizePx / 2) * zoom;
-    let offsetY = (this.#cellSizePx / 2) * zoom;
-
-    if (cellX < midCellX) {
-      diffX = (midCellX - cellX) * this.#cellSizePx * zoom;
-    } else if (cellX > midCellX) {
-      diffX = (cellX - midCellX) * this.#cellSizePx * zoom * -1;
-    } else {
-      diffX = 0;
-    }
-
-    if (cellY < midCellY) {
-      diffY = (midCellY - cellY) * this.#cellSizePx * zoom;
-    } else if (cellY > midCellY) {
-      diffY = (cellY - midCellY) * this.#cellSizePx * zoom * -1;
-    } else {
-      diffY = 0;
-    }
-
-    const cameraX = diffX - offsetX;
-    const cameraY = diffY - offsetY;
-
-    this.#cameraEl.style.transform = `translate(${cameraX}px, ${cameraY}px) scale(${zoom})`;
+  #updateCamera(position, zoom) {
+    this.#cameraEl.style.transform = `scale(${zoom})`;
   }
 
   #renderBackground(sprites, color) {
