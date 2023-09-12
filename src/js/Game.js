@@ -27,10 +27,13 @@ export default class Game {
   #dragonInterval = 200;
   #dragonDelay = 1000;
 
-  constructor(gameEl, scoreEl, roundEl) {
+  #onGameOver;
+
+  constructor(gameEl, scoreEl, roundEl, onGameOver) {
     this.#gameEl = gameEl;
     this.#scoreEl = scoreEl;
     this.#roundEl = roundEl;
+    this.#onGameOver = onGameOver;
   }
 
   get cellsX() {
@@ -97,8 +100,10 @@ export default class Game {
       }
 
       if (this.#isGameOver()) {
-        // TODO: Game over
-        console.log("GAME OVER");
+        this.#onGameOver({
+          score: this.#score,
+          round: this.#round,
+        });
         return;
       }
 

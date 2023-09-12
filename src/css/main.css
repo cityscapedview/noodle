@@ -139,6 +139,10 @@ canvas {
   align-items: center;
 }
 
+.scoreboard-panel-final {
+  margin-bottom: 1rem;
+}
+
 button {
   font-family: inherit;
   font-size: inherit;

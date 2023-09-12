@@ -13,9 +13,19 @@
   <body>
     <div class="game-container">
       <div class="game">
-        <div class="title-screen">
+        <div id="title-screen" class="title-screen">
           <div class="title">dragoom</div>
           <button id="start-button">START</button>
+        </div>
+        <div id="game-over-screen" class="title-screen hidden">
+          <div class="title">game over</div>
+          <div class="scoreboard-panel scoreboard-panel-final">
+            <div for="final-score">Final Score</div>
+            <div id="final-score">-</div>
+            <div for="final-round">Final Round</div>
+            <div id="final-round">-</div>
+          </div>
+          <button id="restart">EXIT</button>
         </div>
         <div class="gameboard hidden" id="gameboard"></div>
         <div class="scoreboard hidden">

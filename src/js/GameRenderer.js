@@ -45,6 +45,7 @@ export default class GameRenderer {
 
     this.#cameraEl.appendChild(canvasEl);
 
+    this.#containerEl.innerHTML = "";
     this.#containerEl.appendChild(this.#cameraEl);
 
     this.#isRenderInitialized = true;
